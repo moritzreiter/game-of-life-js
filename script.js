@@ -38,6 +38,11 @@ function nextGeneration() {
     grid = next;
 }
 
+/*
+| x - 1, y - 1 | x, y - 1 | x + 1, y - 1 |
+| x - 1, y     | x, y     | x + 1, y     |
+| x - 1, y + 1 | x, y + 1 | x + 1, y + 1 |
+*/
 function countNeighbors(y, x) {
     let counter = 0;
     y -= 1;
