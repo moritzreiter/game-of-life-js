@@ -4,10 +4,10 @@ let nextButton = document.getElementById("next");
 let size = 15;
 
 let grid = [];
-for (let x = 0; x < size; x++) {
-    grid[x] = [];
-    for (let y = 0; y < size; y++) {
-        grid[x][y] = Math.floor(Math.random() * 2) == 0;
+for (let y = 0; y < size; y++) {
+    grid[y] = [];
+    for (let x = 0; x < size; x++) {
+        grid[y][x] = Math.floor(Math.random() * 2) == 0;
    }
 }
 
@@ -20,62 +20,62 @@ nextButton.addEventListener("click", () => {
 
 function nextGeneration() {
     let next = [];
-    for (let x = 0; x < size; x++) {
-        next[x] = [];
-        for (let y = 0; y < size; y++) {
-            let neighbors = countNeighbors(x, y);
-            if (grid[x][y] == true && neighbors < 2 || neighbors > 3) {
-                next[x][y] = false;
-            } else if (grid[x][y] == true && neighbors >= 2 && neighbors <= 3) {
-                next[x][y] = true;
-            } else if (grid[x][y] == false && neighbors == 3) {
-                next[x][y] = true;
+    for (let y = 0; y < size; y++) {
+        next[y] = [];
+        for (let x = 0; x < size; x++) {
+            let neighbors = countNeighbors(y, x);
+            if (grid[y][x] == true && neighbors < 2 || neighbors > 3) {
+                next[y][x] = false;
+            } else if (grid[y][x] == true && neighbors >= 2 && neighbors <= 3) {
+                next[y][x] = true;
+            } else if (grid[y][x] == false && neighbors == 3) {
+                next[y][x] = true;
             } else {
-                next[x][y] = grid[x][y]
+                next[y][x] = grid[y][x]
             }
         }
     }
     grid = next;
 }
 
-function countNeighbors(x, y) {
+function countNeighbors(y, x) {
     let counter = 0;
-    x -= 1;
-    if (alive(x, y)) counter++;
+    y -= 1;
+    if (alive(y, x)) counter++;
+    x += 1;
+    if (alive(y, x)) counter++;
     y += 1;
-    if (alive(x, y)) counter++;
-    x += 1;
-    if (alive(x, y)) counter++;
-    x += 1;
-    if (alive(x, y)) counter++;
-    y -= 1;
-    if (alive(x, y)) counter++;
-    y -= 1;
-    if (alive(x, y)) counter++;
+    if (alive(y, x)) counter++;
+    y += 1;
+    if (alive(y, x)) counter++;
     x -= 1;
-    if (alive(x, y)) counter++;
+    if (alive(y, x)) counter++;
     x -= 1;
-    if (alive(x, y)) counter++;
+    if (alive(y, x)) counter++;
+    y -= 1;
+    if (alive(y, x)) counter++;
+    y -= 1;
+    if (alive(y, x)) counter++;
     return counter;
 }
 
-function alive(x, y) {
-    if (x < 0 || x > size - 1 || y < 0 || y > size - 1) {
+function alive(y, x) {
+    if (y < 0 || y > size - 1 || x < 0 || x > size - 1) {
         return false;
     } else {
-        return grid[x][y];
+        return grid[y][x];
     }
 }
 
 function drawGrid() {
     gridDiv.innerHTML = "";
-    for (let x = 0; x < size; x++) {
-        for (let y = 0; y < size; y++) {
+    for (let y = 0; y < size; y++) {
+        for (let x = 0; x < size; x++) {
             let checkbox = document.createElement("input");
             checkbox.type = "checkbox";
             checkbox.setAttribute("x", x);
             checkbox.setAttribute("y", y);
-            if (grid[x][y]) {
+            if (grid[y][x]) {
                 checkbox.checked = true;
            }
             gridDiv.appendChild(checkbox);
