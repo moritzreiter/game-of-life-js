@@ -78,11 +78,17 @@ function drawGrid() {
         for (let x = 0; x < size; x++) {
             let checkbox = document.createElement("input");
             checkbox.type = "checkbox";
-            checkbox.setAttribute("x", x);
-            checkbox.setAttribute("y", y);
+            checkbox.setAttribute("coordinates", x + "-" + y);
+            checkbox.addEventListener("change", () => {
+                if (checkbox.checked) {
+                    grid[y][x] = true;
+                } else {
+                    grid[y][x] = false;
+                }
+            });
             if (grid[y][x]) {
                 checkbox.checked = true;
-           }
+            }
             gridDiv.appendChild(checkbox);
         }
         gridDiv.appendChild(document.createElement("br"));
