@@ -3,7 +3,7 @@
 My crude take on implementing [Conway's Game of
 Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life), a part of my
 journey to learn proper use of JavaScript. Have a look at it running [in
-action](http://home.anothernode.com/conway).
+action](https://anothernode.com/conway).
 
 It's an [exercise](http://eloquentjavascript.net/18_http.html#i_XyKQVmCbTN) in
 the marvelous book [Eloquent Javascript](http://eloquentjavascript.net). There's
